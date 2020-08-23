@@ -6,23 +6,24 @@ body {
 }
 body {
   display: grid;
-  grid-template: 1fr 50% 1fr / 1fr 1fr 1fr 1fr 1fr;
+  grid-template: 1fr auto 1fr / 1fr 1fr 1fr 1fr 1fr;
   font-weight: bold;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max");
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 header {
-  grid-area: 1/1/2/6;
-  height: 150px;
-  padding: 0 25%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: linear-gradient(to bottom, #ffffffb9 25%, #92adc200);
+  grid-area: 1/1/2/6;
+  height: 100px;
+  padding: 0 25%;
+  background: linear-gradient(to bottom, #ffffff83 0%, #92adc200);
 }
 
 a {
@@ -44,6 +45,7 @@ a:hover {
 }
 
 header img {
+  margin-top: 10px;
   width: 70px;
   border: 2.5px solid rgba(100, 78, 16, 0.555);
   padding-right: 1px;
@@ -56,6 +58,7 @@ main {
 }
 
 h1 {
+  margin: 2% 0;
   text-align: center;
   color: rgba(252, 164, 0, 0.664);
   -moz-text-shadow: -2px 1px 3px rgba(0, 0, 0, 0.5);
@@ -66,35 +69,46 @@ h1 {
 
 .box {
   background: linear-gradient(to left, #416e9a4b 30%, #feeccc10);
-  /* background-color: #709ebc86; */
   border-radius: 15px;
   padding: 5% 3%;
   -moz-box-shadow: -2px 1px 6px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: -2px 1px 1px rgba(0, 0, 0, 0.5);
   box-shadow: -2px 1px 4px #fef0d3;
-  line-height: 150%;
+  line-height: 200%;
   margin: 0 auto;
+}
+
+.inputs {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.589);
+  width: 50%;
+  border-radius: 5px;
+  height: 1.5rem;
+}
+
+#submit {
+  width: 25%;
+  border-radius: 5px;
+  background-color: rgba(56, 185, 30, 0.616);
 }
 
 #new-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
-}
-
-#new-form input {
-  text-align: center;
   width: 75%;
 }
 
 footer {
   grid-area: 3/1/4/6;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  padding-top: 5%;
+  justify-content: flex-end;
+  padding-bottom: 1%;
   height: 100px;
   margin-top: auto;
-  background: linear-gradient(to top, #ffffffde 0%, #ffffff00);
+  background: linear-gradient(to top, #ffffff83 0%, #ffffff00);
 }
 
 footer p span {
@@ -116,5 +130,19 @@ footer a {
   }
   footer p {
     font-size: 12px;
+  }
+}
+
+@media only screen and (max-height: 650px) {
+  body {
+    background-repeat: repeat-y;
+  }
+
+  footer {
+    visibility: hidden;
+  }
+  main {
+    overflow: scroll;
+    grid-area: 2/2/4/5;
   }
 }

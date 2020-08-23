@@ -2,20 +2,31 @@
 <table class="box" id="list">
   <thead>
     <tr>
+      <th></th>
       <th>Airline</th>
       <th>Airport</th>
       <th>Flight #</th>
-      <th>Departure (Date/Time)</th>
+      <th>Date</th>
+      <th>Time</th>
     </tr>
   </thead>
   <tbody>
     <% flights.forEach(f => { %>
     <tr>
+      <td>
+        <form
+          action="/todos/<%= f.id %>?_method=DELETE"
+          method="POST"
+          class="delete-form"
+        >
+          <button type="submit">X</button>
+        </form>
+      </td>
       <td><%= f.airline %></td>
       <td><%= f.airport %></td>
       <td><%= f.flightNo %></td>
       <td><%= f.departs %></td>
-      <td><a href="/flights">MAYBE A LINK HERE</a></td>
+      <td><%= f.depTime %></td>
     </tr>
     <% }); %>
   </tbody>
