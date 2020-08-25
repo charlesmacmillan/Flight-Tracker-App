@@ -2,34 +2,48 @@ const Flight = require("../models/flight");
 
 module.exports = {
   index,
+  show,
   new: newFlight,
   create,
-  delete: deleteFlight
+  delete: deleteFlight,
 };
 
 function index(req, res) {
-  Flight.find({}, function (err, flights) {
-    res.render("flights/index", { title: "All Flights", flights });
+  Flight.find({}, function (err, flight) {
+    flight.sort((a, b) => a.departs - b.departs);
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    if (flight.departs < now ){
+      req.body.style.color = 'red';
+    }
+    res.render("flights/index", { title: "Flight Manifest", flight });
+  });
+}
+
+function show(req, res) {
+  Flight.findById(req.params.id, function (err, flight) {
+    res.render("flights/show", { title: "Flight Detail", flight });
   });
 }
 
 function newFlight(req, res) {
-  res.render("flights/new", { title: "Add Flight", });
+  const defaultFlight = new Flight();
+  const dt = defaultFlight.departs;
+  const departsDate = dt.toISOString().slice(0, 16);
+  res.render("flights/new", { departsDate, title: "New Flight" });
 }
 
 function create(req, res) {
   const flight = new Flight(req.body);
   flight.save(function (err) {
-    if (err) return res.redirect('/flights/new');
+    if (err) return res.redirect("/flights/new");
     console.log(flight);
-    res.redirect('flights');
+    res.redirect("/flights");
   });
 }
 
 function deleteFlight(req, res) {
-  // Use the model to delete the to-do
-  Flight.del(req.body.id);
-  // Redirect because we changed data
-  res.redirect("flights");
+  Flight.findByIdAndDelete(req.params.id, function (err, flight) {
+    res.redirect("/flights");    
+  });
 }
-

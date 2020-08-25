@@ -1,15 +1,13 @@
 <%- include('../partials/header') %>
 <form class="box" id="new-form" action="/flights" method="POST">
   <label>Airline:</label>
-  <input class="inputs" type="text" name="airline" />
+  <input onClick="this.select();" class="inputs" type="text" name="airline" value="American"/>
   <label>Airport:</label>
-  <input class="inputs" type="text" name="airport" />
+  <input onClick="this.select();" class="inputs" type="text" name="airport" value="DEN"/>
   <label>Flight #:</label>
   <input class="inputs" type="text" name="flightNo" />
   <label>Departure Date:</label>
-  <input class="inputs" type="date" name="departs" />
-  <label>Departure Time:</label>
-  <input class="inputs" type="time" name="depTime" /><br />
+  <input class="inputs" type="datetime-local" name="departs" value="<%= departsDate %>" />
   <input id="submit" type="submit" value="Add Flight" />
 </form>
 <%- include('../partials/footer') %>
