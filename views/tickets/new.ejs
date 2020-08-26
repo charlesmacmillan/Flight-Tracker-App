@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+<div class="box" id="add-tix-page">
+  <form id="add-tix" action="/flights/<%= flight._id %>/tickets" method="POST">
+    <input
+      class="inputs"
+      name="seat"
+      required
+      pattern="[A-F][1-9]\d?"
+      placeholder="A1 - F99"
+    />
+    <input class="inputs" name="price" type="text" value="100" /><br />
+    <button id="add-tick" type="submit" style="width: 40%;">Add Ticket</button>
+  </form>
+</div>
+<%- include('../partials/footer') %>

@@ -25,7 +25,7 @@
       <td><%= f.airline %></td>
       <td><%= f.airport %></td>
       <td><%= f.flightNo %></td>
-      <td class="time"><%= f.departs %></td>
+      <td style="color: <%= f.departs < new Date() ? 'red' : 'black' %>"><%= f.departs %></td>
       <td>
         <form
         action="/flights/<%= f._id %>"

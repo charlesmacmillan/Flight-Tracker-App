@@ -1,4 +1,5 @@
 const Flight = require("../models/flight");
+const Ticket = require("../models/ticket");
 
 module.exports = {
   index,
@@ -11,18 +12,15 @@ module.exports = {
 function index(req, res) {
   Flight.find({}, function (err, flight) {
     flight.sort((a, b) => a.departs - b.departs);
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    if (flight.departs < now ){
-      req.body.style.color = 'red';
-    }
     res.render("flights/index", { title: "Flight Manifest", flight });
   });
 }
 
 function show(req, res) {
   Flight.findById(req.params.id, function (err, flight) {
-    res.render("flights/show", { title: "Flight Detail", flight });
+    Ticket.find({ flight: flight._id }, function (err, tickets) {
+      res.render("flights/show", { title: "Flight Detail", flight, tickets });
+    });
   });
 }
 
